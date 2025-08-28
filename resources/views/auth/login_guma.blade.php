@@ -32,16 +32,28 @@
                           <h3>Account Login</h3>
                         </div>
                       </div>
-                      <form>
+                      <form action="{{ route('login') }}">
                         <div class="mb-3">
                           <label class="form-label" for="card-email">Email address</label>
-                          <input class="form-control" id="card-email" type="email" />
+                          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                         </div>
                         <div class="mb-3">
                           <div class="d-flex justify-content-between">
                             <label class="form-label" for="card-password">Password</label>
                           </div>
-                          <input class="form-control" id="card-password" type="password" />
+                          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                          @error('password')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
                         </div>
                         <div class="row flex-between-center">
                           <div class="col-auto">
@@ -53,7 +65,7 @@
                           <div class="col-auto"><a class="fs--1" href="../../../pages/authentication/card/forgot-password.html">Forgot Password?</a></div>
                         </div>
                         <div class="mb-3">
-                          <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>
+                          <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">{{ __('Login') }}</button>
                         </div>
                       </form>
                       <div class="position-relative mt-4">
